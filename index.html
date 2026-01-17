@@ -7,7 +7,16 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <audio id="bg-music" src="music.mp3" autoplay loop></audio>
+
+  <div id="entry-overlay">
+    <div class="glass-box">
+      <h1>techn0z3n</h1>
+      <p>you ready to enter?</p>
+      <button id="enter-btn">Enter with Music</button>
+    </div>
+  </div>
+
+  <audio id="bg-music" src="music.mp3" loop></audio>
 
   <nav>
     <div class="nav-container">
@@ -24,44 +33,56 @@
     
     <section id="home" class="tab-content active">
       <h1>hi, i'm technozen</h1>
-      <p>I love coding, music, and design. This site is a small window into my world.</p>
+      <p>i love coding, music, and design. this site is a small window into my world.</p>
       
       <div class="socials">
-        <h3>Connect with me</h3>
+        <h3>connect with me</h3>
         <div class="social-icons">
           <a href="https://github.com/techn0z3n" target="_blank">GitHub</a>
-          <a href="https://discord.com/users/YOUR_ID" target="_blank">Discord</a>
-          <a href="https://youtube.com/@YOUR_HANDLE" target="_blank">YouTube</a>
-          </div>
+          <a href="https://discord.gg/vznAuBgyKK" target="_blank">Discord</a>
+          <a href="https://youtube.com/@biggestcrispy" target="_blank">YouTube</a>
+        </div>
       </div>
     </section>
 
     <section id="projects" class="tab-content">
-      <h1>My Projects</h1>
+      <h1>my projects</h1>
       <div class="project-grid">
         <div class="project-card">
           <h3>The Titans Wiki</h3>
-          <p>An unofficial documentation project for the legendary Titans Mod.</p>
-          <a href="https://techn0z3n.github.io/titans-wiki" target="_blank">View Docs →</a>
+          <p>an unofficial documentation project for the legendary Titans Mod for Minecraft 1.7.10.</p>
+          <a href="https://techn0z3n.github.io/The-Titans-Documentation" target="_blank" style="color: var(--accent-color); text-decoration: none; font-weight: bold;">View Docs →</a>
         </div>
-        </div>
+      </div>
     </section>
 
     <section id="blog" class="tab-content">
       <h1>Blog</h1>
       <div class="blog-post">
         <span class="date">January 17, 2026</span>
-        <h3>Building the Titans Wiki</h3>
-        <p>Today I started formatting the official changelogs and ore data...</p>
+        <h3>building the experience</h3>
+        <p>launched the new aesthetic site today with glassmorphism and integrated audio. the journey begins!</p>
       </div>
-      </section>
+    </section>
 
   </div>
 
   <button id="music-toggle">pause music</button>
 
   <script>
-    // Tab System
+    const entryOverlay = document.getElementById('entry-overlay');
+    const enterBtn = document.getElementById('enter-btn');
+    const music = document.getElementById('bg-music');
+    const musicToggle = document.getElementById('music-toggle');
+
+    // Handle Entry and Music Unlock
+    enterBtn.addEventListener('click', () => {
+      entryOverlay.classList.add('hidden');
+      music.play().catch(e => console.log("Playback blocked: ", e));
+      musicToggle.textContent = 'pause music';
+    });
+
+    // Tab Switching System
     function showTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(tab => {
         tab.classList.remove('active');
@@ -69,17 +90,14 @@
       document.getElementById(tabId).classList.add('active');
     }
 
-    // Music Control
-    const music = document.getElementById('bg-music');
-    const button = document.getElementById('music-toggle');
-
-    button.addEventListener('click', () => {
+    // Manual Music Control
+    musicToggle.addEventListener('click', () => {
       if (music.paused) {
         music.play();
-        button.textContent = 'pause music';
+        musicToggle.textContent = 'pause music';
       } else {
         music.pause();
-        button.textContent = 'play music';
+        musicToggle.textContent = 'play music';
       }
     });
   </script>
