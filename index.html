@@ -3,22 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Me</title>
+  <title>techn0z3n | Home</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Background Music -->
   <audio id="bg-music" src="music.mp3" autoplay loop></audio>
 
+  <nav>
+    <div class="nav-container">
+      <div class="logo">techn0z3n</div>
+      <div class="nav-links">
+        <a href="#" onclick="showTab('home')">Home</a>
+        <a href="#" onclick="showTab('projects')">Projects</a>
+        <a href="#" onclick="showTab('blog')">Blog</a>
+      </div>
+    </div>
+  </nav>
+
   <div class="container">
-    <h1>hi, i'm technozen i think</h1>
-    <p>hi to my personal website. i love coding, music, and design.</p>
-    <p>this site is a small window into who I am.</p>
+    
+    <section id="home" class="tab-content active">
+      <h1>hi, i'm technozen</h1>
+      <p>I love coding, music, and design. This site is a small window into my world.</p>
+      
+      <div class="socials">
+        <h3>Connect with me</h3>
+        <div class="social-icons">
+          <a href="https://github.com/techn0z3n" target="_blank">GitHub</a>
+          <a href="https://discord.com/users/YOUR_ID" target="_blank">Discord</a>
+          <a href="https://youtube.com/@YOUR_HANDLE" target="_blank">YouTube</a>
+          </div>
+      </div>
+    </section>
+
+    <section id="projects" class="tab-content">
+      <h1>My Projects</h1>
+      <div class="project-grid">
+        <div class="project-card">
+          <h3>The Titans Wiki</h3>
+          <p>An unofficial documentation project for the legendary Titans Mod.</p>
+          <a href="https://techn0z3n.github.io/titans-wiki" target="_blank">View Docs →</a>
+        </div>
+        </div>
+    </section>
+
+    <section id="blog" class="tab-content">
+      <h1>Blog</h1>
+      <div class="blog-post">
+        <span class="date">January 17, 2026</span>
+        <h3>Building the Titans Wiki</h3>
+        <p>Today I started formatting the official changelogs and ore data...</p>
+      </div>
+      </section>
+
   </div>
 
   <button id="music-toggle">pause music</button>
 
   <script>
+    // Tab System
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    // Music Control
     const music = document.getElementById('bg-music');
     const button = document.getElementById('music-toggle');
 
