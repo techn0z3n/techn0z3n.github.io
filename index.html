@@ -3,16 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>techn0z3n | Home</title>
+  <title>techn0z3n | home</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+  <div id="forest-bg"></div>
+  <div id="bg-overlay"></div>
+
   <div id="entry-overlay">
     <div class="glass-box">
       <h1>techn0z3n</h1>
-      <p>you ready to enter?</p>
-      <button id="enter-btn">Enter with Music</button>
+      <p>ready to enter?</p>
+      <button id="enter-btn">enter with music</button>
     </div>
   </div>
 
@@ -22,25 +25,40 @@
     <div class="nav-container">
       <div class="logo">techn0z3n</div>
       <div class="nav-links">
-        <a href="#" onclick="showTab('home')">Home</a>
-        <a href="#" onclick="showTab('projects')">Projects</a>
-        <a href="#" onclick="showTab('blog')">Blog</a>
+        <a href="#" onclick="showTab('home')">home</a>
+        <a href="#" onclick="showTab('projects')">projects</a>
+        <a href="#" onclick="showTab('blog')">blog</a>
       </div>
     </div>
   </nav>
 
   <div class="container">
-    
     <section id="home" class="tab-content active">
       <h1>hi, i'm technozen</h1>
       <p>i love coding, music, and design. this site is a small window into my world.</p>
       
+      <div class="skills-section">
+        <h3>skills</h3>
+        <div class="skill">
+          <span>html/css</span>
+          <div class="bar"><div class="progress" style="width: 90%"></div></div>
+        </div>
+        <div class="skill">
+          <span>javascript</span>
+          <div class="bar"><div class="progress" style="width: 75%"></div></div>
+        </div>
+        <div class="skill">
+          <span>modding minecraft (bedrock and java)</span>
+          <div class="bar"><div class="progress" style="width: 85%"></div></div>
+        </div>
+      </div>
+
       <div class="socials">
         <h3>connect with me</h3>
         <div class="social-icons">
-          <a href="https://github.com/techn0z3n" target="_blank">GitHub</a>
-          <a href="https://discord.gg/vznAuBgyKK" target="_blank">Discord</a>
-          <a href="https://youtube.com/@biggestcrispy" target="_blank">YouTube</a>
+          <a href="https://github.com/techn0z3n" target="_blank">my github page</a>
+          <a href="https://discord.gg/vznAuBgyKK" target="_blank">my discord server</a>
+          <a href="https://youtube.com/@biggestcrispy" target="_blank">youtube</a>
         </div>
       </div>
     </section>
@@ -49,48 +67,55 @@
       <h1>my projects</h1>
       <div class="project-grid">
         <div class="project-card">
-          <h3>The Titans Wiki</h3>
-          <p>an unofficial documentation project for the legendary Titans Mod for Minecraft 1.7.10.</p>
-          <a href="https://techn0z3n.github.io/The-Titans-Documentation" target="_blank" style="color: var(--accent-color); text-decoration: none; font-weight: bold;">View Docs →</a>
+          <h3>the titans wiki</h3>
+          <p>an unofficial documentation project for the legendary titans mod for minecraft 1.7.10.</p>
+          <a href="https://techn0z3n.github.io/titans-wiki" target="_blank" class="project-link">view docs →</a>
         </div>
       </div>
     </section>
 
     <section id="blog" class="tab-content">
-      <h1>Blog</h1>
+      <h1>blog</h1>
       <div class="blog-post">
-        <span class="date">January 17, 2026</span>
-        <h3>building the experience</h3>
-        <p>launched the new aesthetic site today with glassmorphism and integrated audio. the journey begins!</p>
+        <span class="date">january 17, 2026</span>
+        <h3>the forest awakens</h3>
+        <p>today i added an interactive parallax background. the forest now reacts to your every move.</p>
       </div>
     </section>
-
   </div>
 
-  <button id="music-toggle">pause music</button>
+  <footer id="now-playing">
+    <div class="music-info">
+      <span class="dot"></span>
+      <span id="song-name">now playing: rose - lukrembo</span>
+    </div>
+    <button id="music-toggle">pause music</button>
+  </footer>
 
   <script>
     const entryOverlay = document.getElementById('entry-overlay');
     const enterBtn = document.getElementById('enter-btn');
     const music = document.getElementById('bg-music');
     const musicToggle = document.getElementById('music-toggle');
+    const forest = document.getElementById('forest-bg');
 
-    // Handle Entry and Music Unlock
+    document.addEventListener('mousemove', (e) => {
+      const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+      const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+      forest.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.1)`;
+    });
+
     enterBtn.addEventListener('click', () => {
       entryOverlay.classList.add('hidden');
-      music.play().catch(e => console.log("Playback blocked: ", e));
+      music.play();
       musicToggle.textContent = 'pause music';
     });
 
-    // Tab Switching System
     function showTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.classList.remove('active');
-      });
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
     }
 
-    // Manual Music Control
     musicToggle.addEventListener('click', () => {
       if (music.paused) {
         music.play();
