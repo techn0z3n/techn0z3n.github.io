@@ -9,6 +9,11 @@
 <body>
 
   <div id="forest-bg"></div>
+  <div id="mist-container">
+    <div class="mist-particle p1"></div>
+    <div class="mist-particle p2"></div>
+    <div class="mist-particle p3"></div>
+  </div>
   <div id="bg-overlay"></div>
 
   <div id="entry-overlay">
@@ -48,7 +53,7 @@
           <div class="bar"><div class="progress" style="width: 75%"></div></div>
         </div>
         <div class="skill">
-          <span>modding minecraft (bedrock and java)</span>
+          <span>modding minecraft (bedrock mostly, not very good at java)</span>
           <div class="bar"><div class="progress" style="width: 85%"></div></div>
         </div>
       </div>
@@ -69,7 +74,7 @@
         <div class="project-card">
           <h3>the titans wiki</h3>
           <p>an unofficial documentation project for the legendary titans mod for minecraft 1.7.10.</p>
-          <a href="https://techn0z3n.github.io/titans-wiki" target="_blank" class="project-link">view docs →</a>
+          <a href="https://techn0z3n.github.io/The-Titans-Documentation" target="_blank" class="project-link">view docs →</a>
         </div>
       </div>
     </section>
@@ -78,8 +83,8 @@
       <h1>blog</h1>
       <div class="blog-post">
         <span class="date">january 17, 2026</span>
-        <h3>the forest awakens</h3>
-        <p>today i added an interactive parallax background. the forest now reacts to your every move.</p>
+        <h3>mist and moss</h3>
+        <p>today i updated the site with a living forest aesthetic. the text is now lowercase to match my vibe, and the background feels like a real forest.</p>
       </div>
     </section>
   </div>
@@ -99,23 +104,31 @@
     const musicToggle = document.getElementById('music-toggle');
     const forest = document.getElementById('forest-bg');
 
+    // mouse parallax
     document.addEventListener('mousemove', (e) => {
-      const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
-      const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+      const moveX = (e.clientX - window.innerWidth / 2) * 0.015;
+      const moveY = (e.clientY - window.innerHeight / 2) * 0.015;
       forest.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.1)`;
     });
 
+    // entry sequence
     enterBtn.addEventListener('click', () => {
-      entryOverlay.classList.add('hidden');
-      music.play();
+      entryOverlay.style.transform = "scale(1.1)";
+      entryOverlay.style.opacity = "0";
+      setTimeout(() => {
+        entryOverlay.classList.add('hidden');
+        music.play();
+      }, 800);
       musicToggle.textContent = 'pause music';
     });
 
+    // tab system
     function showTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
     }
 
+    // music toggle
     musicToggle.addEventListener('click', () => {
       if (music.paused) {
         music.play();
